@@ -1,13 +1,8 @@
-class venta: 
-    def __init__(
-        self, 
-        id_venta: int, 
-        fecha_venta: str,
-        zapato_id: int
-    ):
-        self.id_venta = id_venta
-        self.fecha_venta = fecha_venta
-        self.zapato_id = zapato_id
+from sqlalchemy import Column, Integer, Date, ForeignKey
+from database import Base
 
-    def __str__(self):
-        return f"Venta(id_venta={self.id_venta}, fecha_venta='{self.fecha_venta}', zapato_id={self.zapato_id})"
+class venta(Base): 
+    __tablename__ = "venta"
+    id = Column(Integer, primary_key=True)
+    fecha_venta = Column(Date, nullable=False)
+    zapato_id = Column(Integer, ForeignKey("zapato.id"), nullable=False)

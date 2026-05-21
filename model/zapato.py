@@ -1,19 +1,15 @@
 from model.estado import estado
+from sqlalchemy import Column, Integer, String, Float, Enum, ForeignKey
+from database import Base
 
-class zapato:
-    def __init__(
-        self,
-        id: int, 
-        modelo: str, 
-        talla: int, 
-        precio: float,
-        estado: estado
-    ):
-        self.id_zapato = id
-        self.modelo = modelo
-        self.talla = talla
-        self.precio = precio
-        self.estado = estado
-        
-    def __str__(self):
-        return f"Zapato(id_zapato={self.id_zapato}, modelo='{self.modelo}', talla={self.talla}, precio={self.precio}, estado={self.estado})"
+class zapato(Base):
+    __tablename__ = "zapato"
+    id = Column(Integer, primary_key=True)
+    modelo = Column(String, nullable=False)
+    talla = Column(Integer, nullable=False)
+    precio = Column(Float, nullable=False)
+    foto = Column(String, nullable=True)
+    estado = Column(Enum(estado), nullable=False)
+    trabajador_id = Column(Integer, ForeignKey("trabajador.id"), nullable=False)
+
+   

@@ -1,20 +1,12 @@
 from model.rol import Rol
-from typing import Optional
+from sqlalchemy import Column, Integer, String, Enum
+from database import Base
 
-class Trabajador:
-    def __init__(
-        self, 
-        id_trabajador: int,
-        usuario: str, 
-        password: str, 
-        rol: Rol,
-        correo_electronico: Optional[str] = None
-    ):
-        self.id_trabajador = id_trabajador
-        self.usuario = usuario
-        self.password = password
-        self.rol = rol
-        self.correo_electronico = correo_electronico
 
-    def __str__(self):
-        return f"Trabajador(id_trabajador={self.id_trabajador}, usuario='{self.usuario}', rol='{self.rol.value}', correo_electronico='{self.correo_electronico}')"
+class Trabajador(Base):
+    __tablename__ = "trabajador"
+    id = Column(Integer, primary_key=True)
+    usuario = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+    rol = Column(Enum(Rol), nullable=False)
+    correo_electronico = Column(String, unique=True, nullable=True)
