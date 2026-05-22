@@ -2,6 +2,9 @@
 from pydantic import BaseModel, EmailStr
 from model.rol import Rol
 
+class Config:
+    from_attributes = True
+
 class TrabajadorCreate(BaseModel):
     usuario: str
     password: str
@@ -14,4 +17,4 @@ class TrabajadorResponse(BaseModel):
     correo_electronico: EmailStr
     
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -17,5 +17,4 @@ class ZapatoResponse(BaseModel):
     estado: estado
     
     class Config:
-        orm_mode = True   
-
+        from_attributes = True

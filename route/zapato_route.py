@@ -9,7 +9,7 @@ router = APIRouter()
 #crear los zapatos
 @router.post("/zapatos", response_model=ZapatoResponse)
 def create_zapato(zapato: ZapatoCreate, db: Session = Depends(get_db)):
-    return zapato_dao.crear_zapato(db, zapato)
+    return zapato_dao.create_zapato(db, zapato)
 
 #editar un zapato por su modelo
 @router.put("/zapatos/{id}", response_model=ZapatoResponse)

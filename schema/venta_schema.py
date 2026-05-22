@@ -3,6 +3,7 @@ from datetime import date
 from pydantic import BaseModel
 from schema.zapato_schema import ZapatoResponse 
 
+
 class VentaCreate(BaseModel):
     fecha_venta: date
     zapato_id: int
@@ -12,4 +13,4 @@ class VentaResponse(BaseModel):
     zapato: ZapatoResponse
     
     class Config:
-        orm_mode = True
+        from_attributes = True
