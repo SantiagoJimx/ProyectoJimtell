@@ -5,6 +5,7 @@ from schema.zapato_schema import ZapatoResponse
 
 class VentaCreate(BaseModel):
     fecha_venta: date
+    zapato_id: int
     
 class VentaResponse(BaseModel):
     fecha_venta: date
