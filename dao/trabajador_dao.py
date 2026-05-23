@@ -1,13 +1,14 @@
 from sqlalchemy.orm import Session
 from model.trabajador import Trabajador
 from schema.trabajador_schema import TrabajadorCreate
+from util.security import hash_password
 
 
 #Crear trabajador 
 def crear_trabajador(db: Session, trabajador: TrabajadorCreate):
     nuevo_trabajador = Trabajador(
         usuario=trabajador.usuario,
-        password=trabajador.password,
+        password=hash_password(trabajador.password),
         rol=trabajador.rol,
         correo_electronico=trabajador.correo_electronico
     )

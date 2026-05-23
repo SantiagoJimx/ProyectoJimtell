@@ -4,6 +4,8 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
 
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY", "JimtellSecretKey")
@@ -12,6 +14,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 #generar el token de autenticación
 def crear_token(data: dict) -> str:
     datos = data.copy()
@@ -34,3 +37,10 @@ def verify_token(token: str) -> dict:
         return payload
     except JWTError:
         return None
+    
+#dependencia para obtener el usuario autenticado
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    payload = verify_token(token)
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Token inválido o expirado")
+    return payload
