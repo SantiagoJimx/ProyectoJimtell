@@ -4,17 +4,15 @@ from model.estado import estado
 
 class ZapatoCreate(BaseModel):
     modelo: str
-    talla: int
     precio: float
     foto: str | None = None
-    estado: estado
+    tallas: list[int] = []
 
 class ZapatoResponse(BaseModel):
+    id: int
     modelo: str
-    talla: int
     precio: float
     foto: str | None = None
-    estado: estado
     
     class Config:
         from_attributes = True

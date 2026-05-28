@@ -1,16 +1,21 @@
-#Se encarga de validar los datos de entrada para el trabajador
 from datetime import date
 from pydantic import BaseModel
-from schema.zapato_schema import ZapatoResponse 
-
 
 class VentaCreate(BaseModel):
     fecha_venta: date
-    zapato_id: int
-    
+    modelo: str
+    numero_talla: int
+    precio: float
+    foto: str | None = None
+    talla_id: int
+
 class VentaResponse(BaseModel):
+    id: int
     fecha_venta: date
-    zapato: ZapatoResponse
+    modelo: str
+    numero_talla: int
+    precio: float
+    foto: str | None = None
     
     class Config:
         from_attributes = True
