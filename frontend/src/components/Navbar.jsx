@@ -1,42 +1,67 @@
 import { useNavigate } from 'react-router-dom'
 
-function Navbar({ onFiltroModelo, onFiltroTalla, modelos, tallas }) {
+function Navbar() {
   const navigate = useNavigate()
 
   return (
-    <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm">
-      
-      <h1 className="text-blue-600 font-bold text-xl">JimTell</h1>
+    <nav
+      className="
+        fixed top-0 left-0 w-full z-50
+        bg-white/75
+        backdrop-blur-xl
+        border-b border-gray-200/50
+      "
+    >
+      <div className="px-6 md:px-14 py-4 flex items-center justify-between">
 
-      <div className="flex gap-4">
-        <select
-          onChange={(e) => onFiltroModelo(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Modelo</option>
-          {modelos.map((modelo, i) => (
-            <option key={i} value={modelo}>{modelo}</option>
-          ))}
-        </select>
+        {/* Logo */}
+        <div className="flex items-center gap-3">
 
-        <select
-          onChange={(e) => onFiltroTalla(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <div
+            className="
+              w-11 h-11
+              rounded-2xl
+              bg-blue-600
+              flex items-center justify-center
+              shadow-lg
+            "
+          >
+            <span className="text-white font-black text-lg">
+              J
+            </span>
+          </div>
+
+          <div>
+            <h1 className="text-xl font-black text-gray-800">
+              JimTell
+            </h1>
+
+            <p className="text-xs text-gray-500">
+              Catalogo
+            </p>
+          </div>
+        </div>
+
+        {/* Botón */}
+        <button
+          onClick={() => navigate('/login')}
+          className="
+            bg-blue-600
+            hover:bg-blue-700
+            text-white
+            px-5 py-2.5
+            rounded-2xl
+            font-semibold
+            shadow-lg
+            transition-all
+            duration-300
+            hover:scale-105
+          "
         >
-          <option value="">Talla</option>
-          {tallas.map((talla, i) => (
-            <option key={i} value={talla}>{talla}</option>
-          ))}
-        </select>
+          Admin Login
+        </button>
+
       </div>
-
-      <button
-        onClick={() => navigate('/login')}
-        className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition"
-      >
-        Admin Login
-      </button>
-
     </nav>
   )
 }

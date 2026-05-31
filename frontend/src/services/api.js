@@ -6,6 +6,8 @@ const api = axios.create({ //crea una instancia de axios con una configuración 
 
 api.interceptors.request.use((config) => { //intercepta cada solicitud antes de ser enviada
   const token = localStorage.getItem('token') //obtiene el token de autenticacion al hacer login
+  // DEBUG: log token and request path
+  // console.log('API request', config.url, 'token:', token)
   if (token) {
     config.headers.Authorization = `Bearer ${token}` //agrega el token al herader de inmediato
   }
