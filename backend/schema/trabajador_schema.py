@@ -9,12 +9,10 @@ class TrabajadorCreate(BaseModel):
     usuario: str
     password: str
     rol: Rol
-    correo_electronico: EmailStr
     
 class TrabajadorResponse(BaseModel):
     usuario: str
     rol: Rol
-    correo_electronico: EmailStr
     
     class Config:
         from_attributes = True

@@ -43,23 +43,13 @@ def editar_zapato(db: Session, id: int, zapato_dato: ZapatoCreate, usuario: str)
         db.refresh(zapato_db)
     return zapato_db
 
-#Eliminar un zapato
-def eliminar_zapato(db: Session, id: int, usuario: str):
-    from dao.talla_dao import eliminar_tallas_por_zapato
-    trabajador = db.query(Trabajador).filter(Trabajador.usuario == usuario).first()
-    if trabajador.rol.value == "Administrador":
-        zapato_db = db.query(zapato).filter(zapato.id == id).first()
-    else:
-        zapato_db = db.query(zapato).filter(zapato.id == id, zapato.trabajador_id == trabajador.id).first()
-    if zapato_db:
-        eliminar_tallas_por_zapato(db, id)
-        db.delete(zapato_db)
-        db.commit()
-    return zapato_db
-
 #obtener Zapato por su talla
 def obtener_zapatos_por_talla(db: Session, numero: int):
     return db.query(zapato).join(Talla).filter(
         Talla.numero == numero,
         Talla.estado == estado.DISPONIBLE
     ).all()
+    
+#obtener Zapato por su id
+def obtener_zapato_por_id(db: Session, id: int):
+    return db.query(zapato).filter(zapato.id == id).first()

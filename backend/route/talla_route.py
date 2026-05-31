@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
 from dao import talla_dao, zapato_dao
@@ -6,6 +6,10 @@ from schema.talla_schema import TallaResponse, TallaCreate
 from util.security import get_current_user
 
 router = APIRouter()
+
+def verificar_admin(current_user: dict):
+    if current_user.get("rol") != "Administrador":
+        raise HTTPException(status_code=403, detail="Solo el administrador puede realizar esta acción")
 
 #Obtener tallas por zapato
 @router.get("/zapatos/{zapato_id}/tallas", response_model=list[TallaResponse])
@@ -20,9 +24,11 @@ def vender_talla(talla_id: int, db: Session = Depends(get_db), current_user: dic
 
 @router.post("/tallas", response_model=TallaResponse)
 def agregar_talla(talla: TallaCreate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    verificar_admin(current_user)
     return talla_dao.crear_talla(db, talla.zapato_id, talla.numero)
 
 #eliminar talla
 @router.delete("/tallas/{talla_id}")
 def eliminar_talla(talla_id: int, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    verificar_admin(current_user)
     return talla_dao.eliminar_talla(db, talla_id)

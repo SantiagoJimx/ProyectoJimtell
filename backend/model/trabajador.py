@@ -9,4 +9,4 @@ class Trabajador(Base):
     usuario = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     rol = Column(Enum(Rol), nullable=False)
-    correo_electronico = Column(String, unique=True, nullable=False)
+    

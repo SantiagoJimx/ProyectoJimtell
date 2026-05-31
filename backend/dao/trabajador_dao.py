@@ -9,8 +9,7 @@ def crear_trabajador(db: Session, trabajador: TrabajadorCreate):
     nuevo_trabajador = Trabajador(
         usuario=trabajador.usuario,
         password=hash_password(trabajador.password),
-        rol=trabajador.rol,
-        correo_electronico=trabajador.correo_electronico
+        rol=trabajador.rol
     )
     #agrega el objeto a la sesión de la base de datos, 
     db.add(nuevo_trabajador)
