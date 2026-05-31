@@ -47,6 +47,8 @@ Sistema web de gestión de inventario de calzado para la empresa **Jimtell**. Pe
 ---
 
 ## Estructura del proyecto
+
+```
 ProyectoJimtell/
 ├── backend/
 │   ├── main.py
@@ -57,13 +59,11 @@ ProyectoJimtell/
 │   ├── dao/
 │   └── util/
 └── frontend/
-└── src/
-├── pages/
-├── components/
-└── services/
-
----
-
+    └── src/
+        ├── pages/
+        ├── components/
+        └── services/
+```
 ## Instalación local
 
 ### Requisitos
