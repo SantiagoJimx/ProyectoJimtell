@@ -31,7 +31,6 @@ def editar_trabajador(db: Session, usuario: str, trabajador: TrabajadorCreate):
         trabajador_db.usuario = trabajador.usuario
         trabajador_db.password = trabajador.password
         trabajador_db.rol = trabajador.rol
-        trabajador_db.correo_electronico = trabajador.correo_electronico
         db.commit() #confrima y guarda en la BD
         db.refresh(trabajador_db) #actualiza el objeto con los datos de la base de datos, como el id generado automaticamente
     return trabajador_db
