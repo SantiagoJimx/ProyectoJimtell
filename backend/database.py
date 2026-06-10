@@ -1,8 +1,9 @@
-from sqlalchemy import create_engine #esta libreria es para crear la conexion a la base de datos
-from sqlalchemy.ext.declarative import declarative_base #Esta librera es para crear una clase base para nuestros modelos de datos (es como decirle a SQL Alchemy que estas clases representan tablas en la base de datos)
-from sqlalchemy.orm import sessionmaker #Esta libreria es para crear una clase que nos permita crear sesiones de base de datos (es como decirle a SQL Alchemy que quieres interactuar con la base de datos para hacer consultas, guardar o elimiar datos)
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql://postgres:S%40mael1243@localhost:5432/zapatos_db"
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:S%40mael1243@localhost:5432/zapatos_db")
 
 engine = create_engine(DATABASE_URL) #creamos la conexion a la base de datos usando la URL que definimos
 
