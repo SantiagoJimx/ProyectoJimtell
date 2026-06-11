@@ -49,7 +49,7 @@ function ZapatoDetalle() {
 
   const handleWhatsapp = (zapato) => {
     const urlZapato =
-      `${window.location.origin}/zapato/${zapato.modelo}`
+      `${window.location.origin}/zapato/${zapato.id}`
 
     const mensaje = encodeURIComponent(
       `Hola, estoy interesado en este producto: ${urlZapato}`
