@@ -15,8 +15,7 @@ def crear_zapato(db: Session, zapato_dato: ZapatoCreate, usuario: str):
         trabajador_id=trabajador.id
     )
     db.add(nuevo_zapato)
-    db.commit()
-    db.refresh(nuevo_zapato)
+    db.flush()
     return nuevo_zapato
 
 #Obtener un zapato por su modelo
@@ -39,8 +38,6 @@ def editar_zapato(db: Session, id: int, zapato_dato: ZapatoCreate, usuario: str)
         zapato_db.modelo = zapato_dato.modelo
         zapato_db.precio = zapato_dato.precio
         zapato_db.foto = zapato_dato.foto
-        db.commit()
-        db.refresh(zapato_db)
     return zapato_db
 
 #obtener Zapato por su talla

@@ -14,18 +14,30 @@ def verificar_admin(current_user: dict):
 @router.post("/zapatos", response_model=ZapatoResponse)
 def create_zapato(zapato: ZapatoCreate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     verificar_admin(current_user)
-    nuevo_zapato = zapato_dao.crear_zapato(db, zapato, current_user["sub"])
-    if zapato.tallas:
-        talla_dao.crear_tallas(db, nuevo_zapato.id, zapato.tallas)
-    return nuevo_zapato
+    try:
+        nuevo_zapato = zapato_dao.crear_zapato(db, zapato, current_user["sub"])
+        if zapato.tallas:
+            talla_dao.crear_tallas(db, nuevo_zapato.id, zapato.tallas)
+        db.commit()
+        db.refresh(nuevo_zapato)
+        return nuevo_zapato
+    except:
+        db.rollback()
+        raise
 
 @router.put("/zapatos/{id}", response_model=ZapatoResponse)
 def editar_zapato(id: int, zapato: ZapatoCreate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_user)):
     verificar_admin(current_user)
-    zapato_actualizado = zapato_dao.editar_zapato(db, id, zapato, current_user["sub"])
-    if zapato.tallas:
-        talla_dao.crear_tallas(db, id, zapato.tallas)
-    return zapato_actualizado
+    try:
+        zapato_actualizado = zapato_dao.editar_zapato(db, id, zapato, current_user["sub"])
+        if zapato.tallas:
+            talla_dao.crear_tallas(db, id, zapato.tallas)
+        db.commit()
+        db.refresh(zapato_actualizado)
+        return zapato_actualizado
+    except:
+        db.rollback()
+        raise
 
 @router.get("/zapatos", response_model=list[ZapatoResponse])
 def get_zapatos(db: Session = Depends(get_db)):

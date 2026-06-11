@@ -12,7 +12,6 @@ def crear_tallas(db: Session, zapato_id: int, numeros: list[int]):
             zapato_id=zapato_id
         )
         db.add(talla)
-    db.commit()
 
 def obtener_tallas_por_zapato(db: Session, zapato_id: int):
     return db.query(Talla).filter(Talla.zapato_id == zapato_id).all()
