@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/zapato/:id" element={<ZapatoDetalle />} />
+        <Route path="/zapato/:codigo" element={<ZapatoDetalle />} />
         <Route path="/inventario" element={<ProtectedRoute><Inventario /></ProtectedRoute>} />
         <Route path="/ventas" element={<ProtectedRoute><Ventas /></ProtectedRoute>} />
         <Route path="/trabajadores" element={<ProtectedRoute><Trabajadores /></ProtectedRoute>} />
