@@ -8,7 +8,7 @@ function ZapatoCard({ zapato, tallas = [] }) {
     <motion.div
       whileHover={{ y: -10 }}
       transition={{ duration: 0.3 }}
-      onClick={() => navigate(`/zapato/${zapato.codigo}`)}
+      onClick={() => navigate(`/zapato/${zapato.id}`)}
       className="
         group
         bg-white/80

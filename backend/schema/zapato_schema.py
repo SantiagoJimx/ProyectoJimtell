@@ -1,6 +1,6 @@
-from pydantic import BaseModel, model_validator
+#Se encarga de validar los datos de entrada para el trabajador
+from pydantic import BaseModel
 from model.estado import estado
-from util.security import codificar_id
 
 class ZapatoCreate(BaseModel):
     modelo: str
@@ -13,12 +13,6 @@ class ZapatoResponse(BaseModel):
     modelo: str
     precio: float
     foto: str | None = None
-    codigo: str = ""
-
+    
     class Config:
         from_attributes = True
-
-    @model_validator(mode='after')
-    def set_codigo(self):
-        self.codigo = codificar_id(self.id)
-        return self

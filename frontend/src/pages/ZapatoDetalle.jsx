@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 
 function ZapatoDetalle() {
-  const { codigo } = useParams()
+  const { id } = useParams()
 
   const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ function ZapatoDetalle() {
   useEffect(() => {
     const fetchData = async () => {
       const [zapatoRes, configRes] = await Promise.all([
-        api.get(`/zapatos/codigo/${codigo}`),
+        api.get(`/zapatos/${id}`),
         api.get('/configuracion')
       ])
 
@@ -45,11 +45,11 @@ function ZapatoDetalle() {
     }
 
     fetchData()
-  }, [codigo])
+  }, [id])
 
   const handleWhatsapp = (zapato) => {
     const urlZapato =
-      `${window.location.origin}/zapato/${zapato.codigo}`
+      `${window.location.origin}/zapato/${zapato.id}`
 
     const mensaje = encodeURIComponent(
       `Hola, estoy interesado en este producto: ${urlZapato}`

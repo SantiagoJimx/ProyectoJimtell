@@ -185,7 +185,7 @@ function Home() {
 
                 <button
                   onClick={() =>
-                    navigate(`/zapato/${zapatoHero.codigo}`)
+                    navigate(`/zapato/${zapatoHero.id}`)
                   }
                   className="
                     bg-blue-600

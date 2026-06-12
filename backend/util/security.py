@@ -1,22 +1,14 @@
+#Se utilizara para cifrar contraseñas y generar tokens de autenticación
 from passlib.context import CryptContext 
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
-from hashids import Hashids
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY", "JimtellSecretKey")
-_hashids = Hashids(salt=SECRET_KEY, min_length=4)
-
-def codificar_id(id: int) -> str:
-    return _hashids.encode(id)
-
-def decodificar_id(codigo: str) -> int | None:
-    decoded = _hashids.decode(codigo)
-    return decoded[0] if decoded else None
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto") 
 ALGORITHM = "HS256"
